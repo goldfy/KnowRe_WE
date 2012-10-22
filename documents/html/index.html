@@ -1,7 +1,91 @@
 <html>
     <head>
+    	<META charset="utf-8">
+    	<link rel="stylesheet" href="css/main.css" type="text/css">
+        <script src="/javascript/winning.js"></script>
+        <script src="/javascript/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
-        aa
-    </body>
+    	<header id="header">
+    		<span id="headercontainer">
+	    		<span id="winninglogoset">
+		        	<img class="winninglogo" src="image/logo6.jpg">
+		        	<span class="deathleague">Death League</span>
+		        </span>
+		        <span id="knowrelogoset">
+		        	<span class="sponsoredby">Sponsored by</span>
+		        	<img class="knowrelogo" src="image/knowre_logo2.png">
+		        </span>
+	    	</span>
+            <button type="button" id="add_game">경기추가</button>
+        </header>
+
+        <div id="buttons">
+        	<button type="button" id="show_table"class="div_button">승점표</button>
+        	<button type="button" id="show_log" class="div_button">최근기록</button>
+        	<button type="button" id="add_player" class="div_button">선수추가</button>
+        </div>
+
+        <div id="maincontainer">
+        	<div id="score_table">
+                <table id="scoretablebody" width="100%" border="1">
+                    <tr>
+                        <th>등수</th>
+                        <th>이름</th>
+                        <th>승</th>
+                        <th>패</th>
+                        <th>무</th>
+                        <th>골합산</th>
+                        <th>총점</th>
+                    </tr>
+                </table>
+        	</div>
+
+        	<div id="log_table">
+
+        	</div>
+
+      	  	<div id="add_page" >
+            
+          	  		<div>
+    	      	  		<span>이름: </span>
+    	      	  		<input id="new_name" type="text">
+          	  		</div>
+          	  		<div>
+    	      	  		<span>식별키: </span>
+    	      	  		<input id="new_key" type="text">
+    	      	  	</div>
+                    <input id="addPlayerButton" type="submit" />
+  
+      	  	</div>
+
+            <div id="add_result">
+                <div>
+                    <span class="player_font">Player1</span>
+                    <span class="player_font">Player2</span>
+                </div>
+
+                <div>
+                    <span class="title_font">Key</span>
+                    <span class="title_font">Score</span>
+                    <span class="title_font">Score</span>
+                    <span class="title_font">Key</span>
+                </div>
+                
+                <div>
+                    <input type="text" id="p1_key">
+                    <input type="text" id="p1_score">
+                    <span> : </span>
+                    <input type="text" id="p2_score">
+                    <input type="text" id="p2_key">
+                </div>
+                <button id="sendGameResultButton" type="submit">경기결과전송</button>
+            </div>
+
+        </div>
+    
+        <script>
+            var winning = new Winning();
+        </script>
 </html>
