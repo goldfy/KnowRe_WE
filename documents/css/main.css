@@ -83,6 +83,9 @@ body{
 .rowcomponent{
 	text-align: center;
 }
+.logcomponent{
+	text-align: center;
+}
 
 #add_game{
 	position: relative;
@@ -94,4 +97,8 @@ body{
 #add_result{
 	display: none;
 
+}
+
+#log_table{
+	display: none;
 }

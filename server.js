@@ -4,18 +4,19 @@
  */
 
 
+
 /*
     Call all modules
 */
 var express = require('express'),
-    router = require('./modules/router'),
-    database = require('./modules/database'),
-    http = require('http'),
-    path = require('path'),
-    mysql = require('mysql'),
-    fs = require('fs'),
-    socketio = require('socket.io'),
-    app = express();
+        router = require('./modules/router'),
+        database = require('./modules/database'),
+       http = require('http'),
+       path = require('path'),
+       mysql = require('mysql'),
+       fs = require('fs'),                    
+       socketio = require('socket.io'),
+        app = express();
 
 /*
     set the database data and record
@@ -63,8 +64,6 @@ var io = socketio.listen(server);
 router.route(app, fs);
 
 
-
-
 io.sockets.on('connection', function(socket){
 
 
@@ -78,12 +77,13 @@ io.sockets.on('connection', function(socket){
 
   socket.on('newPlayerInfo', function(data){
 
+
+
     client.query("SELECT ranking, final from haha", function(error, result){
       var zeroChecker = 0;
       var maximum = 0;
 
       client.query("INSERT INTO haha (_key, name, ranking) VALUES (?, ?, ?)", [data.new_key, data.new_name, 0]);
-      console.log('db insertion success!!');
 
       for(var i = 0; i < result.length; i++){
         if(result[i].ranking != 0){
@@ -108,7 +108,13 @@ io.sockets.on('connection', function(socket){
   });
 
   socket.on('gameInfo', function(data){
-    console.log(data);
+    client.query ("SELECT _key, name from haha", function(error, result){
+      console.log(result);      
+    });
+//    data.p1_key
+//    data.p1_score
+//    data.p2_key
+//    data.p2_score
   });
 
 

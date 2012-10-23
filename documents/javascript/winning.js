@@ -3,10 +3,6 @@
 
 var Winning = function() {
 	this.socket = io.connect();
-
-
-
-
 	this.initialize();
 };
 
@@ -21,6 +17,7 @@ _.socketEvent = function() {
 	this.socket.emit('getData', "");
 	this.socket.on('dataServerToClient', function(data){
 		var row;
+		console.log(data);
 		for(var i = 0; i<data.length; i++){
 			row = row + "<tr class='rowcomponent'>" +
 			"<td class='rowcomponent'>"+data[i].ranking+"</td>" +
@@ -36,9 +33,21 @@ _.socketEvent = function() {
 		$(row).appendTo("#scoretablebody");
 	});
 
+	this.socket.on('dataServerToClientLog', function(data){
+		var row;
+		console.log(data);
+		for(var i = 0; i<data.length; i++){
+			row = row + "<tr class='logcomponent'>" +
+			"<td class='logcomponent'>"+data[i].player1+ "   " +data[i].player1_score +" : " +data[i].player2_score+"   " +data[i].player2+"</td>" +
+			"<td class='logcomponent'>"+data[i].datetime+"</td>" +
+			"</tr>";
+		}
+		$(".logcomponent").remove();
+		$(row).appendTo("#logtablebody");
+	});
 
 }
-
+	
 
 _.bindEvent =  function(){
 	var that = this;
@@ -52,6 +61,7 @@ _.bindEvent =  function(){
 	});
 
 	$("#show_log").click(function(){
+		thatsocket.emit('getLogData', "");
 		$("#add_result").hide();
 		$("#score_table").hide();
 		$("#add_page").hide();
