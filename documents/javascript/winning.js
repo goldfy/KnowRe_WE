@@ -25,8 +25,11 @@ _.socketEvent = function() {
 			"<td class='rowcomponent'>"+data[i].win+"</td>" +
 			"<td class='rowcomponent'>"+data[i].lose+"</td>" +
 			"<td class='rowcomponent'>"+data[i].draw+"</td>" +
+			"<td class='rowcomponent'>"+data[i].goal_made+"</td>" +
+			"<td class='rowcomponent'>"+data[i].goal_taken+"</td>" +
 			"<td class='rowcomponent'>"+data[i].score_sum+"</td>" +
 			"<td class='rowcomponent'>"+data[i].final+"</td>" +
+			"<td class='rowcomponent'>"+data[i].average+"</td>" +
 			"</tr>";
 		}
 		$(".rowcomponent").remove();
@@ -107,26 +110,36 @@ _.bindEvent =  function(){
 	$("#sendGameResultButton").click(function(){
 		var obj = {
 			"p1_key": $("#p1_key").val(),
-			"p1_score": $("#p1_score").val(),
-			"p2_score": $("#p2_score").val(),
+			"p1_score": parseInt($("#p1_score").val()),
+			"p2_score": parseInt($("#p2_score").val()),
 			"p2_key": $("#p2_key").val()
 		};
+
 
 		if(obj.p1_key=="" || obj.p1_score=="" || obj.p2_key=="" || obj.p2_score=="" ){
 			alert("빈칸에 정보 쓰세요ㅡㅡ");
 		}else{
 			thatsocket.emit('gameInfo', obj);
+			console.log(obj.p1_key.length, obj.p1_score.length, obj.p2_key, obj.p2_score);
 
-			alert("경기 결과가 성공적으로 추가되었습니다.");
-			$("#p1_key").val("");
-			$("#p1_score").val("");
-			$("#p2_key").val("");
-			$("#p2_score").val("");
+			thatsocket.on('dataServerToClientLog', function(data){
 
-			$("#add_result").hide();
-			$("#score_table").show();
+				if(data==0){
+					alert("입력하신 식별키가 존재하지 않습니다.")
+				}else{
+					alert("경기 결과가 성공적으로 추가되었습니다.");
+					$("#p1_key").val("");
+					$("#p1_score").val("");
+					$("#p2_key").val("");
+					$("#p2_score").val("");
 
-			thatsocket.emit('getData', "");
+					$("#add_result").hide();
+					$("#score_table").show();
+
+					thatsocket.emit('getData', "");
+				}
+			});
+
 		}
 	});
 }

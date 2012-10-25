@@ -3,6 +3,7 @@
     	<META charset="utf-8">
     	<link rel="stylesheet" href="css/main.css" type="text/css">
         <script src="/javascript/winning.js"></script>
+        <script src="/javascript/Shuttle.js"></script>
         <script src="/javascript/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
     </head>
@@ -31,13 +32,16 @@
         	<div id="score_table">
                 <table id="scoretablebody" width="100%" border="1">
                     <tr>
-                        <th>등수</th>
+                        <th>순위</th>
                         <th>이름</th>
                         <th>승</th>
                         <th>패</th>
                         <th>무</th>
-                        <th>골득실</th>
-                        <th>총점</th>
+                        <th>득점</th>
+                        <th>실점</th>
+                        <th>득실차</th>
+                        <th>승점</th>
+                        <th>승점평균</th>
                     </tr>
                 </table>
         	</div>
@@ -91,6 +95,7 @@
         </div>
     
         <script>
+            var shuttle = new Shuttle("#maincontainer");
             var winning = new Winning();
         </script>
 </html>

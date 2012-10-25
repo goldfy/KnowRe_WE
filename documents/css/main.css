@@ -102,3 +102,7 @@ body{
 #log_table{
 	display: none;
 }
+
+#maincontainer{
+	overflow: hidden;
+}
